@@ -87,7 +87,7 @@
   if(!window.THREE||!box) return;
 
   var scene=new THREE.Scene();
-  var cam=new THREE.PerspectiveCamera(45,1,.1,100); cam.position.z=5.6;
+  var cam=new THREE.PerspectiveCamera(45,1,.1,100); cam.position.z=7.0;
   var r=new THREE.WebGLRenderer({antialias:true,alpha:true});
   r.setPixelRatio(Math.min(devicePixelRatio,2));
   box.appendChild(r.domElement);
@@ -108,11 +108,6 @@
   var knot=new THREE.Mesh(kg,new THREE.MeshStandardMaterial({vertexColors:true,metalness:.5,roughness:.26}));
   group.add(knot);
 
-  // شبکه سیمی نازک دور گره
-  var wire=new THREE.Mesh(new THREE.TorusKnotGeometry(1,.34,140,16,2,3),
-    new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true,transparent:true,opacity:.16}));
-  group.add(wire);
-
   // حلقه‌های مداری با ماهواره
   function orbit(rad,tiltX,tiltY,speed){
     var o=new THREE.Group(); o.rotation.x=tiltX; o.rotation.y=tiltY;
@@ -126,7 +121,7 @@
     group.add(o);
     return {arm:arm,speed:speed,mats:[ringM,satM,halo.material]};
   }
-  var orbA=orbit(1.95,1.15,.2,.012), orbB=orbit(2.35,-.8,.5,-.008);
+  var orbA=orbit(1.8,1.15,.2,.012), orbB=orbit(2.1,-.8,.5,-.008);
 
   // درخشش پشت شکل
   var gc=document.createElement('canvas'); gc.width=gc.height=128;
@@ -134,7 +129,7 @@
   gr.addColorStop(0,'rgba(255,255,255,1)'); gr.addColorStop(.4,'rgba(255,255,255,.35)'); gr.addColorStop(1,'rgba(255,255,255,0)');
   gx.fillStyle=gr; gx.fillRect(0,0,128,128);
   var glow=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(gc),transparent:true,opacity:.3,depthWrite:false}));
-  glow.scale.set(6.2,6.2,1); glow.position.z=-1.5; scene.add(glow);
+  glow.scale.set(7.4,7.4,1); glow.position.z=-1.5; scene.add(glow);
 
   // دو ابر ذرات با دو رنگ
   function cloud(n,minR,maxR,size){
@@ -159,7 +154,6 @@
       col.setXYZ(i,cT.r,cT.g,cT.b);
     }
     col.needsUpdate=true;
-    wire.material.color.copy(cA);
     lightA.color.copy(cA); lightB.color.copy(cB);
     glow.material.color.copy(cA);
     dustA.material.color.copy(cA); dustB.material.color.copy(cB);
@@ -185,7 +179,6 @@
     spin*=.94;
     if(!calm){
       knot.rotation.y+=.004+spin;
-      wire.rotation.y-=.002+spin*.5; wire.rotation.x+=.0012;
       dustA.rotation.y-=.0012+spin*.3;
       dustB.rotation.y+=.0008+spin*.2; dustB.rotation.x+=.0004;
       orbA.arm.rotation.z+=orbA.speed+spin*.2;
