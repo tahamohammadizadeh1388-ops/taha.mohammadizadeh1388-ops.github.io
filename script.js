@@ -107,7 +107,7 @@
       nContact: "Contact",
     },
   };
-  var lang = "fa";
+  var lang = "en";
   try {
     var sl = localStorage.getItem("lang");
     if (sl === "fa" || sl === "en") lang = sl;
