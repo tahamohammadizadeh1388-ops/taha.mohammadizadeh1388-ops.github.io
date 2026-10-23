@@ -87,3 +87,45 @@ footer{padding:36px 0 44px;color:var(--muted);font-size:.9rem}
   .photo{width:min(240px,70%)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+/* ---- افزوده‌ها ---- */
+section[id]{scroll-margin-top:84px}
+.progress{position:fixed;top:0;inset-inline:0;height:3px;z-index:50;pointer-events:none;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(var(--p,0));transform-origin:right}
+html[dir=ltr] .progress{transform-origin:left}
+header{position:sticky;top:0;z-index:40;margin:0 -24px;padding:14px 24px;border-bottom:1px solid transparent;
+  transition:background .3s,border-color .3s,backdrop-filter .3s}
+header.stuck{background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border-color:var(--line)}
+.nav{display:flex;gap:30px}
+.nav a{position:relative;text-decoration:none;color:var(--muted);font-weight:500;font-size:.95rem;padding:4px 0;transition:color .2s}
+.nav a::after{content:"";position:absolute;inset-inline:0;bottom:-2px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transition:transform .3s}
+.nav a:hover,.nav a.on{color:var(--ink)}
+.nav a:hover::after,.nav a.on::after{transform:scaleX(1)}
+::selection{background:var(--accent);color:var(--accent-ink)}
+.btn.main{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
+.btn:active{transform:translateY(0) scale(.97)}
+.skill:hover h3{color:var(--accent)}
+/* یک حرکت هماهنگ موقع لود: متن‌های hero یکی‌یکی ظاهر می‌شن */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero h1,.lead,.btns{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.lead{animation-delay:.12s}.btns{animation-delay:.24s}
+@media (max-width:760px){.nav{display:none}}
+@media (prefers-reduced-motion:reduce){.hero h1,.lead,.btns{animation:none}}
+
+/* ---- بخش مهارت‌ها ---- */
+.sec-lead{max-width:36em;color:var(--muted);margin:-12px 0 36px;font-size:1.05rem}
+.skills{gap:20px}
+.skill{display:flex;flex-direction:column;gap:10px;padding:22px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--bg) 70%,transparent)}
+.skill:hover{border-color:var(--accent);transform:translateY(-4px)}
+html[dir=ltr] .skill:hover{transform:translateY(-4px)}
+.skill p{margin:0;flex:1}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;direction:ltr}
+.chips li{font-size:.78rem;font-weight:500;padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.chips.big li{font-size:.9rem;padding:5px 16px;color:var(--ink)}
+.meter{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;width:var(--lv);border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transform:scaleX(0);transform-origin:right;transition:transform 1.1s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+html[dir=ltr] .meter i{transform-origin:left}
+.skill.in .meter i{transform:scaleX(1)}
+.skill small{color:var(--muted);font-size:.8rem}
+.tools-row{margin-top:44px}
+.tools-row h3{font-size:1.1rem;font-weight:800;margin:0 0 14px}
